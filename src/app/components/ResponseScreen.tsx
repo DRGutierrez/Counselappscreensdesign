@@ -1,20 +1,32 @@
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Ellipsis } from 'lucide-react';
+import { useState } from 'react';
 
 interface ResponseScreenProps {
   onNavigate: (screen: string) => void;
 }
 
 export function ResponseScreen({ onNavigate }: ResponseScreenProps) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Header */}
       <div className="px-6 pt-16 pb-8">
-        <button 
-          onClick={() => onNavigate('home')}
-          className="text-[#6b9eff] mb-8"
-        >
-          Done
-        </button>
+        <div className="flex items-center justify-between mb-8">
+          <button 
+            onClick={() => onNavigate('home')}
+            className="text-[#6b9eff]"
+          >
+            Done
+          </button>
+          <h1 className="text-lg tracking-tight">Response</h1>
+          <button 
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="p-2 hover:bg-[#1a1a1a]/30 rounded-lg transition-all duration-200"
+          >
+            <Ellipsis className="w-5 h-5 text-[#4a5568]" strokeWidth={1.5} />
+          </button>
+        </div>
       </div>
 
       {/* Content */}
@@ -65,6 +77,41 @@ export function ResponseScreen({ onNavigate }: ResponseScreenProps) {
           </button>
         </div>
       </div>
+
+      {/* Menu Panel - Bottom Sheet */}
+      {menuOpen && (
+        <>
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/30 z-40"
+            onClick={() => setMenuOpen(false)}
+          />
+          
+          {/* Panel */}
+          <div className="fixed bottom-8 left-6 right-6 bg-[#1a1a1a]/90 backdrop-blur-xl rounded-3xl z-50 max-w-[430px] mx-auto px-6 py-6 shadow-2xl">
+            <div className="space-y-2">
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  onNavigate('reflections');
+                }}
+                className="w-full text-left py-3 text-[#d4d4d4] hover:text-[#e5e5e5] transition-colors"
+              >
+                Reflections
+              </button>
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  onNavigate('reflections');
+                }}
+                className="w-full text-left py-3 text-[#d4d4d4] hover:text-[#e5e5e5] transition-colors"
+              >
+                History
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
