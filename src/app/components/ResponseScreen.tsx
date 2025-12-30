@@ -6,7 +6,7 @@ interface ResponseScreenProps {
 }
 
 export function ResponseScreen({ onNavigate }: ResponseScreenProps) {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [memoryAcknowledged, setMemoryAcknowledged] = useState(true);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
@@ -20,12 +20,7 @@ export function ResponseScreen({ onNavigate }: ResponseScreenProps) {
             Done
           </button>
           <h1 className="text-lg tracking-tight">Response</h1>
-          <button 
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 hover:bg-[#1a1a1a]/30 rounded-lg transition-all duration-200"
-          >
-            <Ellipsis className="w-5 h-5 text-[#4a5568]" strokeWidth={1.5} />
-          </button>
+          <div className="w-12"></div>
         </div>
       </div>
 
@@ -36,82 +31,62 @@ export function ResponseScreen({ onNavigate }: ResponseScreenProps) {
           <h2 className="text-[#7c7c7c] tracking-wider uppercase text-xs">
             Summary
           </h2>
-          <p className="text-[#e5e5e5] leading-relaxed">
+          <p className="text-[#d4d4d4] leading-relaxed">
             You're thinking about ways to improve your morning routine and create more intentional time for reflection before starting work.
           </p>
         </div>
 
-        {/* Organized Section */}
+        {/* Organized Thoughts Section */}
         <div className="space-y-4">
           <h2 className="text-[#7c7c7c] tracking-wider uppercase text-xs">
-            Organized
+            Organized thoughts
           </h2>
-          <ul className="space-y-3">
-            <li className="text-[#e5e5e5] leading-relaxed flex items-start">
-              <span className="text-[#6b9eff] mr-3 mt-1.5 block w-1 h-1 rounded-full bg-[#6b9eff] flex-shrink-0"></span>
-              <span>Wake up 30 minutes earlier</span>
-            </li>
-            <li className="text-[#e5e5e5] leading-relaxed flex items-start">
-              <span className="text-[#6b9eff] mr-3 mt-1.5 block w-1 h-1 rounded-full bg-[#6b9eff] flex-shrink-0"></span>
-              <span>Journal for 10 minutes with coffee</span>
-            </li>
-            <li className="text-[#e5e5e5] leading-relaxed flex items-start">
-              <span className="text-[#6b9eff] mr-3 mt-1.5 block w-1 h-1 rounded-full bg-[#6b9eff] flex-shrink-0"></span>
-              <span>Review daily intentions before opening laptop</span>
-            </li>
-            <li className="text-[#e5e5e5] leading-relaxed flex items-start">
-              <span className="text-[#6b9eff] mr-3 mt-1.5 block w-1 h-1 rounded-full bg-[#6b9eff] flex-shrink-0"></span>
-              <span>Consider a short walk or stretching</span>
-            </li>
-          </ul>
+          <div className="space-y-3">
+            <p className="text-[#d4d4d4] leading-relaxed">
+              • Wake up 30 minutes earlier
+            </p>
+            <p className="text-[#d4d4d4] leading-relaxed">
+              • Journal for 10 minutes with coffee
+            </p>
+            <p className="text-[#d4d4d4] leading-relaxed">
+              • Review daily intentions before opening laptop
+            </p>
+            <p className="text-[#d4d4d4] leading-relaxed">
+              • Consider a short walk or stretching
+            </p>
+          </div>
         </div>
 
-        {/* Action Button */}
+        {/* Optional Next Step */}
         <div className="pt-4">
           <button 
             onClick={() => onNavigate('reflections')}
-            className="w-full bg-[#1a1a1a] hover:bg-[#252525] text-[#e5e5e5] py-4 px-6 rounded-2xl flex items-center justify-between transition-colors"
+            className="text-[#7c7c7c] hover:text-[#9c9c9c] transition-colors text-sm"
           >
-            <span>Turn into a plan</span>
-            <ChevronRight className="w-5 h-5 text-[#7c7c7c]" strokeWidth={1.5} />
+            Would you like me to turn this into a simple plan?
           </button>
         </div>
-      </div>
 
-      {/* Menu Panel - Bottom Sheet */}
-      {menuOpen && (
-        <>
-          {/* Backdrop */}
-          <div 
-            className="fixed inset-0 bg-black/30 z-40"
-            onClick={() => setMenuOpen(false)}
-          />
-          
-          {/* Panel */}
-          <div className="fixed bottom-8 left-6 right-6 bg-[#1a1a1a]/90 backdrop-blur-xl rounded-3xl z-50 max-w-[430px] mx-auto px-6 py-6 shadow-2xl">
-            <div className="space-y-2">
+        {/* Memory Acknowledgment */}
+        {memoryAcknowledged && (
+          <div className="pt-12 space-y-2">
+            <p className="text-[#8a8a8a] text-sm">
+              I'll remember this.
+            </p>
+            <div className="flex items-center gap-3">
+              <p className="text-[#5a5a5a] text-xs">
+                You can review or remove memories anytime.
+              </p>
               <button
-                onClick={() => {
-                  setMenuOpen(false);
-                  onNavigate('reflections');
-                }}
-                className="w-full text-left py-3 text-[#d4d4d4] hover:text-[#e5e5e5] transition-colors"
+                onClick={() => setMemoryAcknowledged(false)}
+                className="text-[#8a8a8a] hover:text-[#9ca3af] text-xs transition-colors"
               >
-                Reflections
-              </button>
-              <button
-                onClick={() => {
-                  setMenuOpen(false);
-                  onNavigate('reflections');
-                }}
-                className="w-full text-left py-3 text-[#d4d4d4] hover:text-[#e5e5e5] transition-colors"
-              >
-                History
+                Undo
               </button>
             </div>
           </div>
-        </>
-      )}
+        )}
+      </div>
     </div>
   );
 }

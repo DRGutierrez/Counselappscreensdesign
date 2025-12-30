@@ -27,7 +27,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
       <div className="flex flex-col items-center">
         {/* Microphone Button */}
         <button 
-          onClick={() => onNavigate('response')}
+          onClick={() => onNavigate('error')}
           className={`mb-10 p-10 rounded-full bg-gradient-to-br from-[#161616] to-[#0f0f0f] hover:from-[#1a1a1a] hover:to-[#131313] transition-all duration-300 shadow-[0_0_40px_rgba(100,120,140,0.08)] ${menuOpen ? 'opacity-70' : 'opacity-100'}`}
         >
           <Mic className="w-20 h-20 text-[#b4c5d8]" strokeWidth={1.2} />
@@ -73,7 +73,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
               <button
                 onClick={() => {
                   setMenuOpen(false);
-                  onNavigate('reflections');
+                  onNavigate('history');
                 }}
                 className="w-full text-left py-3 text-[#d4d4d4] hover:text-[#e5e5e5] transition-colors"
               >
